@@ -1,0 +1,43 @@
+<?php
+// print_r($product);
+if(isset($msg)){
+    print_r($msg);
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Add Product </h2>
+    <?php echo $this->tag->form(['','class' => 'my-5']); ?>
+    <p class="row">
+        <label for="email" class='label col-2 mx-5'>Product Name</label>
+        <?php echo $this->tag->textField(['product_name', 'class' => 'form-control col-6']) ?>
+    </p>
+    <p class="row">
+        <label for="email" class='label col-2 mx-5'>Product Category </label>
+        <?php echo $this->tag->textField(['product_category', 'class' => 'form-control col-6']) ?>
+    </p>
+    <p class="row">
+        <label for="email" class='label col-2 mx-5'>Sale Price </label>
+        <?php echo $this->tag->NumericField(['sale_price', 'class' => 'form-control col-6']) ?>
+    </p>
+    <p class="row">
+        <label for="email" class='label col-2 mx-5'>Cost Price </label>
+        <?php echo $this->tag->NumericField(['cost_price', 'class' => 'form-control col-6']) ?>
+    </p>
+    
+
+    <p>
+        <?php echo $this->tag->submitButton(["Add Product", 'class' => 'btn  btn-primary mx-5']); ?>
+    </p>
+    <?php echo $this->tag->endForm(); ?>
+</body>
+</html>
