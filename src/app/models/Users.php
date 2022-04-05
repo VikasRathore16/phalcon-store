@@ -7,4 +7,9 @@ class Users extends Model
     public $id;
     public $name;
     public $email;
+
+    public function pagination()
+    {
+        return 'hello';
+    }
 }

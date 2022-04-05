@@ -37,7 +37,6 @@ class LoginController extends Controller
             ->where("email = '$email'")
             ->andWhere("password = '$password'")
             ->execute();
-        $this->view->user = $user;
 
         if (count($checkemail) > 0 && count($checkpassword)) {
             $this->view->msg = 'Authentication failed';
@@ -56,13 +55,25 @@ class LoginController extends Controller
             if ($email == 'admin@gmail.com') {
                 header("Location: http://localhost:8080/admin/dashboard");
             } else {
-                header("Location: http://localhost:8080/user");
+                $this->session->set('user', [
+                    'user_id' => $user[0]->user_id,
+                    'username' => $user[0]->username,
+                    'firstname' => $user[0]->firstname,
+                    'lastname' => $user[0]->lastname,
+                    'email' => $user[0]->email,
+                    'role' => $user[0]->role,
+                    'address' => $user[0]->address,
+                    'pincode' => $user[0]->pincode,
+                    'state' => $user[0]->state,
+                    'country' => $user[0]->country,
+                ]);
+                header("Location: http://localhost:8080/user/dashboard");
             }
         }
     }
 
 
-    
+
 
     public function logoutAction()
     {

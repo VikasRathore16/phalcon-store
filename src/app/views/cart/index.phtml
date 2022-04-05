@@ -1,0 +1,46 @@
+<?php
+// echo "<pre>";
+// print_r($this->session->get('cart'));
+// echo "</pre>";
+$total = 0;
+
+$html = "<table class='table mt-5 container border'>
+<tr>
+    <th>Product</th>
+    <th>Price</th>
+    <th>Qty</th>
+    <th>Total</th>
+</tr>";
+foreach ($cart['cart'] as $product) {
+    // print_r($product['product_id']);
+    $total += $product['quantity'] * $product['sale_price'];
+    // print_r($product);
+    $html .=
+        "<tr>
+    <td>$product[product_name]</td>
+    <td>$ $product[sale_price]</td>
+    <td>
+        <input type='text' class='w-20' id='update$product[product_id]' data-quantity='$product[quantity]' value='$product[quantity]'>
+        <button class='btn btn-secondary border-0' id='update' data-product_id=$product[product_id]>Update</button>
+        <button class='btn btn-danger border-0' id='Remove' data-product_id=$product[product_id]>Remove</button>
+    </td>
+    <td>$" .
+        $product['quantity'] * $product['sale_price'] .
+        "</td>
+</tr>";
+}
+$html .= "
+<tfoot>
+    <tr>
+        <td colspan='4' class='text-end'>$ $total</td>
+    </tr>
+</tfoot>
+</table>
+";
+
+echo $html;
+
+echo $this->tag->linkTo(['/cart/checkout', 'Checkout', 'class' => 'btn btn-primary ']);
+?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../../public/assests/js/cart.js" rel="text/javascript"></script>

@@ -15,6 +15,8 @@ use Phalcon\Session\Manager;
 use Phalcon\Session\Adapter\Stream;
 use Phalcon\Http\Response;
 use Phalcon\Config\ConfigFactory;
+// session_start();
+
 
 $config = new Config([]);
 $fileName = '../app/etc/config.php';

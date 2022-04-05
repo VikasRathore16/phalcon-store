@@ -1,3 +1,6 @@
+<?php
+// print_r($products);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,22 +15,38 @@
     <header>
         <div class="row header mb-5">
             <div class="col-2">LOGO</div>
-            <div class="col-2">Cart</div>
+            <div class="col-2"><a href="http://localhost:8080/cart">Cart</a></div>
             <div class="col-2"><a href="http://localhost:8080/login">Login</a></div>
             <div class="col-2"><a href="http://localhost:8080/signup">Signup</a></div>
-            <div class="col-2"><a href="http://localhost:8080/login/signout">Singout</a></div>
+            <div class="col-2"><a href="http://localhost:8080/login/logout">logout</a></div>
+            <div class="col-2"><a href="http://localhost:8080/cart/destroyses">destroy</a></div>
         </div>
     </header>
     <main>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Add To store</a>
-            </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 products">
+            <?php foreach ($products as $product) { ?>
+                <div class="col-4 mb-4">
+                    <div class="card shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                        </svg>
+                        <div class="card-body">
+                            <p class="card-title h4"><?php echo $product->product_name ?></p>
+                            <p>
+                                <span class='price text-danger small' style="text-decoration : line-through;">$ <?php echo $product->cost_price ?></span>
+                                <span class="text-primary h6 mx-2"> $<?php echo $product->sale_price ?></span>
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button type="button" class="btn btn-sm btn-outline-secondary add-to-cart" data-product_id="<?php echo $product->product_id ?>">Add To Cart</button>           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
     </main>
 </body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../../public/assests/js/cart.js" rel="text/javascript"></script>
 </html>
