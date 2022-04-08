@@ -2,6 +2,6 @@
 
 use Phalcon\Mvc\Model;
 
-class Products extends Model
+class Orders extends Model
 {
 }

@@ -1,3 +1,6 @@
+<?php
+header("Cache-Control: no cache");
+?>
 <!doctype html>
 <html lang="en">
 
@@ -84,22 +87,21 @@
         </div>
         <div class="col-md-7 col-lg-8 form">
           <h4 class="mb-3">Billing address</h4>
-          <form action="http://localhost:8080/order/index" method="post">
-          <div class="row g-3">
-           
+          <form action="http://localhost:8080/order/index" method="post" >
+            <div class="row g-3">
+
               <div class="col-sm-6">
                 <label for="firstName" class="form-label">First name</label>
                 <?php if (isset($user)) {
-                  echo "<input type='text' class='form-control' id='firstName' value=" . $user['firstname'] . " placeholder='' disabled>";
+                  echo "<input type='hidden' class='form-control' name ='user_id' ' value='$user[user_id]'  placeholder='' >";
+                  echo "<input type='text' class='form-control' name='firstname' value=" . $user['firstname'] . " placeholder='' disabled>";
                 } else {
-                  echo "<input type='text' class='form-control' id='firstName' value='' placeholder='' >";
+                  echo "<input type='text' class='form-control' name='firstname' value='' placeholder='' >";
                 }
                 ?>
-                <?php if (isset($user)) {
-                  echo "<input type='hidden' class='form-control' id='cartItems' value=" . count($cart['cart']) . "  placeholder='' >";
-                  echo "<input type='hidden' class='form-control' id='username' value='user exists'  placeholder='' >";
-                } else {
-                  echo "<input type='hidden' class='form-control' id='username' value='user not exists'  placeholder='' >";
+                <?php if (isset($cart)) {
+                  echo "<input type='hidden' class='form-control' name='quantity' value=" . count($cart['cart']) . "  placeholder='' >";
+                 
                 }
                 ?>
               </div>
@@ -107,9 +109,10 @@
               <div class="col-sm-6">
                 <label for="lastname" class="form-label">Last name</label>
                 <?php if (isset($user) == true) {
-                  echo "<input type='text' class='form-control' id='lastname' value=" . $user['lastname'] . " placeholder='' disabled>";
+                  echo "<input type='text' class='form-control' name='lastname' value=" . $user['lastname'] . " placeholder='' disabled>";
+                  echo "<input type='hidden' class='form-control' name='total' value=" . $total . "  placeholder='' >";
                 } else {
-                  echo "<input type='text' class='form-control' id='lastname' value='' placeholder='' >";
+                  echo "<input type='text' class='form-control' name='lastname' value='' placeholder='' >";
                 }
                 ?>
               </div>
@@ -117,16 +120,16 @@
               <div class="col-12">
                 <label for="email" class="form-label">Email </label>
                 <?php if (isset($user) == true) {
-                  echo "<input type='email' class='form-control' id='email'  value=" . $user['email'] . " placeholder='you@example.com' disabled >";
+                  echo "<input type='email' class='form-control' name='email'  value=" . $user['email'] . " placeholder='you@example.com' disabled >";
                 } else {
-                  echo "<input type='email' class='form-control' id='email'  value='' placeholder='you@example.com'  >";
+                  echo "<input type='email' class='form-control' name='email'  value='' placeholder='you@example.com'  >";
                 }
                 ?>
               </div>
 
               <div class="col-12">
                 <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address" value="<?php
+                <input type="text" class="form-control" name="address" value="<?php
 
                                                                             if (isset($user)) {
                                                                               echo $user['address'];
@@ -140,7 +143,7 @@
 
               <div class="col-md-5">
                 <label for="country" class="form-label">Country</label>
-                <input type="text" class="form-control" id="country" value="<?php
+                <input type="text" class="form-control" name="country" value="<?php
                                                                             if (isset($user)) {
                                                                               echo $user['country'];
                                                                             }
@@ -151,7 +154,7 @@
 
               <div class="col-md-4">
                 <label for="state" class="form-label">State</label>
-                <input type="text" class="form-control" id="state" value="<?php
+                <input type="text" class="form-control" name="state" value="<?php
                                                                           if (isset($user)) {
                                                                             echo $user['state'];
                                                                           }
@@ -161,18 +164,15 @@
 
               <div class="col-md-3">
                 <label for="zip" class="form-label">Pincode</label>
-                <input type="text" class="form-control" id="pincode" value="<?php
+                <input type="text" class="form-control" name="pincode" value="<?php
                                                                             if (isset($user)) {
                                                                               echo $user['pincode'];
                                                                             }
                                                                             ?>" placeholder="">
-                <div class="invalid-feedback">
-                  Zip code required.
-                </div>
               </div>
-          </div>
-          <hr class="my-4">
-          <button class="w-100 btn btn-primary btn-lg" id='formSubmit' type="submit">Place Order</button>
+            </div>
+            <hr class="my-4">
+            <button class="w-100 btn btn-primary btn-lg" name='submit' type="submit">Place Order</button>
           </form>
         </div>
       </div>

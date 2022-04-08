@@ -11,6 +11,7 @@ $html = "<table class='table mt-5 container border'>
     <th>Qty</th>
     <th>Total</th>
 </tr>";
+if(isset($cart)){
 foreach ($cart['cart'] as $product) {
     // print_r($product['product_id']);
     $total += $product['quantity'] * $product['sale_price'];
@@ -40,7 +41,13 @@ $html .= "
 
 echo $html;
 
-echo $this->tag->linkTo(['/cart/checkout', 'Checkout', 'class' => 'btn btn-primary ']);
+echo $this->tag->linkTo(['/cart/checkout', 'Checkout', 'class' => 'btn btn-primary container ']);
+}else{
+    echo '<div class="container"><h1 class="alert alert-success border mt-5 "> Add some items in Cart</h1>';
+    echo $this->tag->linkTo(['index','Back to Store','class ' =>'btn btn-primary mx-5']);   
+    echo "</div>"; 
+}
+
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="../../../public/assests/js/cart.js" rel="text/javascript"></script>
